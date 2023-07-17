@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Grades</title>
+</head>
+<body>
+    <script>
+        var gradesData = "jim|25, sue|32, mary|34, ann|22, ted|28, frank|15, lisa|19, mike|30, ahn|26, vishaya|27";
+
+        // Step 1: Parse the given string
+        var students = gradesData.split(', ');
+        var studentScores = [];
+
+        for (var i = 0; i < students.length; i++) {
+            var parts = students[i].split('|');
+            var name = parts[0];
+            var score = parseInt(parts[1]);
+            studentScores.push({ name: name, score: score });
+        }
+
+        // Step 2: Calculate lowest, highest, and average scores
+        var lowestScore = Infinity;
+        var highestScore = -Infinity;
+        var totalScore = 0;
+
+        for (var j = 0; j < studentScores.length; j++) {
+            var score = studentScores[j].score;
+            totalScore += score;
+            if (score < lowestScore) {
+                lowestScore = score;
+            }
+            if (score > highestScore) {
+                highestScore = score;
+            }
+        }
+
+        var averageScore = totalScore / studentScores.length;
+
+        // Step 3: Display the formatted data
+        var output = "";
+        for (var k = 0; k < studentScores.length; k++) {
+            var student = studentScores[k];
+            var name = student.name.charAt(0).toUpperCase() + student.name.slice(1);
+            var score = student.score;
+            output += name + " - " + score + "<br>";
+        }
+
+        var resultHTML = "<h2>Student Grades:</h2>" + output +
+            "<br>Total number of students: " + studentScores.length +
+            "<br>Lowest score: " + lowestScore +
+            "<br>Highest score: " + highestScore +
+            "<br>Average score: " + averageScore.toFixed(2);
+
+        document.body.innerHTML = resultHTML;
+    </script>
+</body>
+</html>
